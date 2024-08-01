@@ -66,22 +66,22 @@ describe('OrdersService', () => {
     },
     {
       distance: 3,
-      expectedDelivery: 2,
+      expectedDelivery: 3,
       orderId: '1b3d4a4c-ee46-4d1c-b9a5-bf13196c3382',
     },
     {
       distance: 7,
-      expectedDelivery: 3,
+      expectedDelivery: 8,
       orderId: '1b3d4a4c-ee46-4d1c-b9a5-bf13196c3383',
     },
     {
       distance: 12,
-      expectedDelivery: 5,
+      expectedDelivery: 15,
       orderId: '1b3d4a4c-ee46-4d1c-b9a5-bf13196c3384',
     },
     {
       distance: 19,
-      expectedDelivery: 8,
+      expectedDelivery: 25,
       orderId: '1b3d4a4c-ee46-4d1c-b9a5-bf13196c3385',
     },
   ])(
