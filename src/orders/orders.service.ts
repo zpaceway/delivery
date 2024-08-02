@@ -11,5 +11,24 @@ export class OrdersService {
     private orderRepository: Repository<Order>,
   ) {}
 
-  async processOrder(processOrderDto: ProcessOrderDto) {}
+  async procesaOrden(processOrderDto: ProcessOrderDto) {
+    const order = this.orderRepository.create({
+      id: processOrderDto.orderId,
+      userId: processOrderDto.userId,
+      value: processOrderDto.value,
+      distance: processOrderDto.distance,
+    });
+
+    order.calCostoDelivery();
+
+    await this.orderRepository.insert(order);
+
+    return {
+      id: processOrderDto.orderId,
+      userId: processOrderDto.userId,
+      value: processOrderDto.value,
+      distance: processOrderDto.distance,
+      delivery: order.delivery,
+    };
+  }
 }

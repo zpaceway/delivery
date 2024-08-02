@@ -53,7 +53,7 @@ describe('OrdersService', () => {
       distance: 25,
     };
 
-    await expect(service.processOrder(processOrderDto)).rejects.toThrow(
+    await expect(service.procesaOrden(processOrderDto)).rejects.toThrow(
       'Unprocessable entry',
     );
   });
@@ -94,7 +94,7 @@ describe('OrdersService', () => {
         distance: distance,
       };
 
-      const result = await service.processOrder(processOrderDto);
+      const result = await service.procesaOrden(processOrderDto);
 
       expect(result.delivery).toBe(expectedDelivery);
     },
