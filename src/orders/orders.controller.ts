@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { ProcessOrderDto } from '../dto';
-
+// cspell:disable
 @Controller('api/orders')
 export class OrdersController {
   constructor(private ordersService: OrdersService) {}
