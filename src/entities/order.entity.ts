@@ -3,13 +3,13 @@ import { Entity, Column, PrimaryColumn, Index } from 'typeorm';
 @Entity()
 export class Order {
 
-private DeliveryCostoPorKilometro = [
-  [1, 1]
-  ,[5, 3]
-  ,[10, 8]
-  ,[15, 15]
-  ,[20, 25]
-];
+  private distanceInKmDeliveryInDollarsMapping = [
+    [1, 1],
+    [5, 3],
+    [10, 8],
+    [15, 15],
+    [20, 25],
+  ];
 
 
   @PrimaryColumn('uuid')
@@ -28,19 +28,20 @@ private DeliveryCostoPorKilometro = [
   @Column('float')
   delivery: number;
 
-  getCostoPorKilometro(){
-    for(const[distanciaAContratar, costoAPagar] of this .DeliveryCostoPorKilometro ){
-      if( this.distance < distanciaAContratar ){
-        return costoAPagar;
+  getDelivery() {
+    for (const [distanceInKm, deliveryInDollars] of this
+      .distanceInKmDeliveryInDollarsMapping) {
+      if (this.distance < distanceInKm) {
+        return deliveryInDollars;
       }
     }
 
     return null;
   }
 
-  calculateDelivery(){
-    const delivery = this.getCostoPorKilometro();
-    if(delivery === null){
+  calculateDelivery() {
+    const delivery = this.getDelivery();
+    if (delivery === null) {
       throw new Error('Unprocessable entry');
     }
 

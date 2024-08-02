@@ -13,10 +13,10 @@ export class OrdersService {
 
   async processOrder(processOrderDto: ProcessOrderDto) {
     const order = this.orderRepository.create({
-      id: processOrderDto.orderId
-      , userId: processOrderDto.userId
-      , value: processOrderDto.value
-      , distance: processOrderDto.distance
+      id: processOrderDto.orderId,
+      userId: processOrderDto.userId,
+      value: processOrderDto.value,
+      distance: processOrderDto.distance,
     });
 
     order.calculateDelivery();
@@ -24,15 +24,11 @@ export class OrdersService {
     await this.orderRepository.insert(order);
 
     return {
-      id: processOrderDto.orderId
-      , userId: processOrderDto.userId
-      , value: processOrderDto.value
-      , distance: processOrderDto.distance
-      , delivery: order.delivery
+      id: processOrderDto.orderId,
+      userId: processOrderDto.userId,
+      value: processOrderDto.value,
+      distance: processOrderDto.distance,
+      delivery: order.delivery
     }
-
-
-
-
   }
 }
