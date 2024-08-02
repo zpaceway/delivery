@@ -1,0 +1,44 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    environment: Test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Create .env file
+        run: |
+          echo "SERVICE_VERSION=${{ vars.SERVICE_VERSION }}" >> .env
+          echo "DATABASE_TYPE=${{ vars.DATABASE_TYPE }}" >> .env
+          echo "DATABASE_HOST=${{ vars.DATABASE_HOST }}" >> .env
+          echo "DATABASE_PORT=${{ vars.DATABASE_PORT }}" >> .env
+          echo "DATABASE_USERNAME=${{ vars.DATABASE_USERNAME }}" >> .env
+          echo "DATABASE_PASSWORD=${{ vars.DATABASE_PASSWORD }}" >> .env
+          echo "ENVIRONMENT=${{ vars.ENVIRONMENT }}" >> .env
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Start database
+        run: npm run start:db
+
+      - name: Run tests
+        run: |
+          cat .env
+          npm run test
+
+      - name: Stop database
+        run: npm run stop:db
