@@ -8,6 +8,6 @@ export class OrdersController {
 
   @Post('process')
   processOrder(@Body() processOrderDto: ProcessOrderDto) {
-    return this.ordersService.processOrder(processOrderDto);
+    return this.ordersService.procesaOrden(processOrderDto);
   }
 }
