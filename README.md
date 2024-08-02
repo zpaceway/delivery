@@ -12,7 +12,7 @@ El sistema tiene las siguientes condiciones:
 El controlador al igual que el servicio debe entregar la orden procesada con su valor de delivery en el siguiente formato
 
 {
-    id: string,
+    orderId: string,
     userId: string,
     value: number,
     distance: number,
