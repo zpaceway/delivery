@@ -8,6 +8,7 @@ export class OrdersController {
 
   @Post('process')
   processOrder(@Body() processOrderDto: ProcessOrderDto) {
+    console.log({ processOrderDto });
     return this.ordersService.processOrder(processOrderDto);
   }
 }
