@@ -19,6 +19,16 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Create .env file
+        run: |
+          echo "SERVICE_VERSION=${{ env.SERVICE_VERSION }}" >> .env
+          echo "DATABASE_TYPE=${{ env.DATABASE_TYPE }}" >> .env
+          echo "DATABASE_HOST=${{ env.DATABASE_HOST }}" >> .env
+          echo "DATABASE_PORT=${{ env.DATABASE_PORT }}" >> .env
+          echo "DATABASE_USERNAME=${{ env.DATABASE_USERNAME }}" >> .env
+          echo "DATABASE_PASSWORD=${{ env.DATABASE_PASSWORD }}" >> .env
+          echo "ENVIRONMENT=${{ env.ENVIRONMENT }}" >> .env
+
       - name: Install dependencies
         run: npm install
 
@@ -26,6 +36,14 @@ jobs:
         run: npm run start:db
 
       - name: Run tests
+        env:
+          SERVICE_VERSION: ${{ env.SERVICE_VERSION }}
+          DATABASE_TYPE: ${{ env.DATABASE_TYPE }}
+          DATABASE_HOST: ${{ env.DATABASE_HOST }}
+          DATABASE_PORT: ${{ env.DATABASE_PORT }}
+          DATABASE_USERNAME: ${{ env.DATABASE_USERNAME }}
+          DATABASE_PASSWORD: ${{ env.DATABASE_PASSWORD }}
+          ENVIRONMENT: ${{ env.ENVIRONMENT }}
         run: npm run test
 
       - name: Stop database
