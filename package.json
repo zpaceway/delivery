@@ -18,7 +18,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "start:db": "docker run --name cashback-srv-postgres -e POSTGRES_PASSWORD=test123 -p 15432:5432 -d postgres:latest",
+    "start:db": "docker run --name cashback-srv-postgres -e POSTGRES_PASSWORD=secure123 -p 15432:5432 -d postgres:latest",
     "stop:db": "docker rm -f cashback-srv-postgres"
   },
   "dependencies": {

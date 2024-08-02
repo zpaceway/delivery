@@ -2,6 +2,16 @@ import { Entity, Column, PrimaryColumn, Index } from 'typeorm';
 
 @Entity()
 export class Order {
+
+private DeliveryCostoPorKilometro = [
+  [1, 1]
+  ,[5, 3]
+  ,[10, 8]
+  ,[15, 15]
+  ,[20, 25]
+];
+
+
   @PrimaryColumn('uuid')
   id: string;
 
@@ -17,4 +27,24 @@ export class Order {
 
   @Column('float')
   delivery: number;
+
+  getCostoPorKilometro(){
+    for(const[distanciaAContratar, costoAPagar] of this .DeliveryCostoPorKilometro ){
+      if( this.distance < distanciaAContratar ){
+        return costoAPagar;
+      }
+    }
+
+    return null;
+  }
+
+  calculateDelivery(){
+    const delivery = this.getCostoPorKilometro();
+    if(delivery === null){
+      throw new Error('Unprocessable entry');
+    }
+
+    this.delivery = delivery;
+  }
+
 }
