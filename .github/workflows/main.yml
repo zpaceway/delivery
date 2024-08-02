@@ -36,15 +36,10 @@ jobs:
         run: npm run start:db
 
       - name: Run tests
-        env:
-          SERVICE_VERSION: ${{ env.SERVICE_VERSION }}
-          DATABASE_TYPE: ${{ env.DATABASE_TYPE }}
-          DATABASE_HOST: ${{ env.DATABASE_HOST }}
-          DATABASE_PORT: ${{ env.DATABASE_PORT }}
-          DATABASE_USERNAME: ${{ env.DATABASE_USERNAME }}
-          DATABASE_PASSWORD: ${{ env.DATABASE_PASSWORD }}
-          ENVIRONMENT: ${{ env.ENVIRONMENT }}
-        run: npm run test
+
+        run: |
+          cat .env
+          npm run test
 
       - name: Stop database
         run: npm run stop:db
