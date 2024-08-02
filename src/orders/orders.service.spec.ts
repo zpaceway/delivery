@@ -94,9 +94,9 @@ describe('OrdersService', () => {
         distance: distance,
       };
 
-      const result = await service.processOrder(processOrderDto);
-
+      const result = await service.processOrder(processOrderDto);    
       expect(result.delivery).toBe(expectedDelivery);
+      
     },
   );
 });
